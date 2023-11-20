@@ -8,7 +8,7 @@ const {
 } = require("../Validation/UserAuthentication");
 
 const Login = async (req, res, next) => {
-  console.log(req.body)
+
   const { email, password } = req.body;
   try {
     if (!isPasswordValid(password) && !isEmailValid(email)) {
@@ -38,7 +38,7 @@ const Register = async (req, res, next) => {
       return next(CreateError(503, "Invalid Credentials!"));
     }
   } catch (err) {
-    return next(err); 
+    return next(err);
   }
 
   const user = new UserModel({

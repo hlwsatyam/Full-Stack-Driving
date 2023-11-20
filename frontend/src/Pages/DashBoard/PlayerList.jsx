@@ -18,22 +18,39 @@ const PlayerList = () => {
   };
 
   return (
-    <div className="flex justify-center items-center flex-wrap gap-x-4">
-      {players.map((item) => (
-        <p className="bg-orange-500  text-lg text-white  my-5 py-4 rounded-2xl px-10 ">
-          {" "}
-          <span>{item.id}</span>
-          <span className="float-right ml-8 ">
-            {item.perfs[player]?.rating}
-          </span>
-        </p>
-      ))}
+    <div>
+      <TableVisual players={players} player={player} />
+      <p className="bg-orange-500  text-lg text-white   py-4 rounded-2xl px-10 ">
+        {" "}
+        <span>Player Name</span>
+        <span className="float-right ml-8 ">Rating</span>{" "}
+      </p>
+
     </div>
   );
 };
 
 export default PlayerList;
 
+const TableVisual = ({ players, player }) => (
+  <div>
+    {" "}
+    <h1 className="text-center text-2xl "> Table Visualization! </h1>
+    <table className="border w-full ">
+      <tr>
+        {" "}
+        <th>Username</th> <th>Rating</th>{" "}
+      </tr>
 
+      {players.map((item) => (
+        <tr className="w-[100%]">
+          {" "}
+          <td className="text-center border">{item.id}</td>
+          <td className="text-center border ">{item.perfs[player]?.rating}</td>
+        </tr>
+      ))}
+    </table>
+  </div>
+);
 
 

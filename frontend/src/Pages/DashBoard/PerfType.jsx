@@ -18,7 +18,7 @@ const PerfType = () => {
     "racingKings",
     "threeCheck",
   ];
-  const [currentPerfType, setCurrentPerfType] = useState(Perflist[0]);
+  const [currentPerfType, setCurrentPerfType] = useState(Perflist[5]);
   useEffect(() => {
     dispatch(PerfListAction(currentPerfType));
   }, [currentPerfType]);
