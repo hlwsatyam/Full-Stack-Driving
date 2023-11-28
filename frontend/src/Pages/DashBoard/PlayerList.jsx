@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const PlayerList = () => {
   const player = useSelector((s) => s);
@@ -12,8 +13,8 @@ const PlayerList = () => {
   }, [player]);
   const submitHandler = async () => {
     await axios.get(`${baseurl}/${player}`).then((res) => {
-      console.log(res.data.users);
-      setPlayer(res.data.users);
+      console.log(res.data);
+      setPlayer(res.data);
     });
   };
 
@@ -25,32 +26,41 @@ const PlayerList = () => {
         <span>Player Name</span>
         <span className="float-right ml-8 ">Rating</span>{" "}
       </p>
-
     </div>
   );
 };
 
 export default PlayerList;
 
-const TableVisual = ({ players, player }) => (
-  <div>
-    {" "}
-    <h1 className="text-center text-2xl "> Table Visualization! </h1>
-    <table className="border w-full ">
-      <tr>
-        {" "}
-        <th>Username</th> <th>Rating</th>{" "}
-      </tr>
-
-      {players.map((item) => (
-        <tr className="w-[100%]">
+const TableVisual = ({ players, player }) => {
+  const navigate = useNavigate();
+  return (
+    <div>
+      {" "}
+      <h1 className="text-center text-2xl "> Table Visualization! </h1>
+      <table className="border w-full ">
+        <tr>
           {" "}
-          <td className="text-center border">{item.id}</td>
-          <td className="text-center border ">{item.perfs[player]?.rating}</td>
+          <th>Username</th> <th>Rating History</th> <th>Rating</th>{" "}
         </tr>
-      ))}
-    </table>
-  </div>
-);
 
-
+        {players.map((item) => (
+          <tr className="w-[100%]">
+            {" "}
+            <td className="text-center border">{item.username}</td>
+            <td className="text-center border">
+              {" "}
+              <button
+                onClick={() => navigate(`/${item.username}`)}
+                className="bg-amber-300 rounded-lg px-4 py-2"
+              >
+                Click To View
+              </button>{" "}
+            </td>
+            <td className="text-center border ">{item.rating}</td>
+          </tr>
+        ))}
+      </table>
+    </div>
+  );
+};

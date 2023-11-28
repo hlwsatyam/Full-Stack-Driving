@@ -8,10 +8,9 @@ const {
 } = require("../Validation/UserAuthentication");
 
 const Login = async (req, res, next) => {
-
   const { email, password } = req.body;
   try {
-    if (!isPasswordValid(password) && !isEmailValid(email)) {
+    if (!isPasswordValid(password) || !isEmailValid(email)) {
       return next(CreateError(503, "Invalid Credentials!"));
     }
   } catch (err) {

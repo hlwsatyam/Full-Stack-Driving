@@ -12,6 +12,7 @@ const Port = process.env.PORT || 6000;
 //Routers
 App.use(express.json());
 App.use(require("cors")());
+
 App.use("/api/auth", AuthRouter);
 App.use("/", ChessRouter);
 
